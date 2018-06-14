@@ -20,3 +20,13 @@ const opts = {
 const vc = new VideoCrop();
 vc.run(); // outputs two files: '/path/to/out1.mp4', '/path/to/out2.mp4'
 ```
+
+## Contribute
+
+### Build
+
+`yarn run build`
+
+### Tests
+
+`yarn test`
