@@ -1,11 +1,13 @@
-import VideoCrop from '../src/index.js';
+import os from 'os';
+import VideoCrop from '../src/index';
+
 
 test('Default options not required in constructor', () => {
   const vc = new VideoCrop();
 
   const o = vc.getOptions();
   expect(o.input).toBe('');
-  expect(o.output).toBe('');
+  expect(o.output).toBe(`${os.homedir()}/out.mp4`);
 });
 
 test('Can define input file from constructor', () => {
