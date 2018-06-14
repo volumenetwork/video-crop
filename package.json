@@ -1,0 +1,18 @@
+{
+  "name": "video-crop",
+  "version": "1.0.0",
+  "description": "Lib to crop videos using ffmpeg",
+  "main": "build/index.js",
+  "author": "James Irving-Swift",
+  "license": "MIT",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src -d build"
+  },
+  "dependencies": {
+    "fluent-ffmpeg": "^2.1.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
