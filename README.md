@@ -1,5 +1,7 @@
 # video-crop
 
+[![Build Status](https://travis-ci.org/volumenetwork/video-crop.svg?branch=master)](https://travis-ci.org/volumenetwork/video-crop)
+
 ## Usage
 
 ```$xslt
