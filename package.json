@@ -1,6 +1,6 @@
 {
   "name": "video-crop",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Lib to crop videos using ffmpeg",
   "main": "build/index.js",
   "author": "James Irving-Swift",
