@@ -1,3 +1,5 @@
+/* global test, expect */
+
 import os from 'os';
 import VideoCrop from '../src/index';
 
@@ -12,7 +14,7 @@ test('Default options not required in constructor', () => {
 
 test('Can define input file from constructor', () => {
   const vc = new VideoCrop({
-    input: './path/to/file.mp4'
+    input: './path/to/file.mp4',
   });
 
   const o = vc.getOptions();
@@ -22,7 +24,7 @@ test('Can define input file from constructor', () => {
 
 test('Can define output file from constructor', () => {
   const vc = new VideoCrop({
-    output: './path/to/file.mp4'
+    output: './path/to/file.mp4',
   });
 
   const o = vc.getOptions();
