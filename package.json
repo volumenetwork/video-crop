@@ -5,6 +5,7 @@
   "main": "build/index.js",
   "author": "James Irving-Swift",
   "license": "MIT",
+  "keywords": ["video-crop", "video", "crop", "ffmpeg"],
   "repository": {
     "type": "git",
     "url": "https://github.com/volumenetwork/video-crop"
