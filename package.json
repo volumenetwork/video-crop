@@ -5,6 +5,10 @@
   "main": "build/index.js",
   "author": "James Irving-Swift",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/volumenetwork/video-crop"
+  },
   "scripts": {
     "build": "babel src -d build",
     "test": "jest __test__"
