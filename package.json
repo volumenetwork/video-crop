@@ -6,13 +6,18 @@
   "author": "James Irving-Swift",
   "license": "MIT",
   "scripts": {
-    "build": "./node_modules/.bin/babel src -d build"
+    "build": "babel src -d build",
+    "test": "jest __test__"
   },
   "dependencies": {
-    "fluent-ffmpeg": "^2.1.2"
+    "babel-jest": "^23.0.1",
+    "babel-polyfill": "^6.26.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "jest": "^23.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0"
   }
 }
