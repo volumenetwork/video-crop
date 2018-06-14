@@ -1,5 +1,6 @@
 import FfmpegCommand from 'fluent-ffmpeg';
 import os from 'os';
+import VideoCropError from './errors/VideoCropError';
 
 const defaultOptions = {
   input: '',
@@ -14,6 +15,22 @@ function buildCropString(width, height, x, y) {
   return `${width}:${height}:${x}:${y}`;
 }
 
+function stringToArray(val) {
+  if (Array.isArray(val)) {
+    return val;
+  }
+
+  return [val];
+}
+
+/**
+ *
+ * @param width
+ * @param height
+ * @param x
+ * @param y
+ * @returns {{filter: string, options: string}}
+ */
 function buildCropObject(width, height, x, y) {
   return {
     filter: 'crop',
@@ -26,6 +43,16 @@ export default class VideoCrop {
   constructor(options) {
     const o = options || {};
     this.opts = { ...defaultOptions, ...o };
+
+    this.opts.x = stringToArray(this.opts.x);
+    this.opts.y = stringToArray(this.opts.y);
+    this.opts.height = stringToArray(this.opts.height);
+    this.opts.width = stringToArray(this.opts.width);
+
+    if (this.opts.x.length !== this.opts.y.length &&
+      this.opts.width.length !== this.opts.height.length) {
+      throw new VideoCropError('x, y, width and height must be arrays of equal length');
+    }
   }
 
   getOptions() {
@@ -47,16 +74,31 @@ export default class VideoCrop {
     return result;
   }
 
+  getOutputFilename(i) {
+    if (this.opts.x.length === 1) {
+      return this.opts.output;
+    }
+
+    const tmp = this.opts.output.split('.');
+    tmp[tmp.length - 2] = `${tmp[tmp.length - 2]}${i}`;
+    return tmp.join('.');
+  }
+
   run() {
-    const command = new FfmpegCommand({
-      source: this.opts.input,
-    });
+    for (let i = 0; i < this.opts.x.length; i += 1) {
+      const command = new FfmpegCommand({
+        source: this.opts.input,
+      });
 
-    console.log(this.buildFilterArray());
-    command.videoFilters(this.buildFilterArray());
-    console.log(this.opts.output);
-    command.output(this.opts.output);
+      command.complexFilter([buildCropObject(
+        this.opts.width[i],
+        this.opts.height[i],
+        this.opts.x[i],
+        this.opts.y[i],
+      )]);
 
-    command.run();
+      command.output(this.getOutputFilename(i + 1));
+      command.run();
+    }
   }
 }
