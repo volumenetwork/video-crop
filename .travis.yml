@@ -10,4 +10,5 @@ install:
   - "yarn install"
 script:
   - "yarn run build"
+  - "yarn run lint"
   - "yarn test"
