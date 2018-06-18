@@ -9,6 +9,7 @@ const defaultOptions = {
   y: [0],
   height: [0],
   width: [0],
+  fps: null,
 };
 
 function buildCropString(width, height, x, y) {
@@ -85,20 +86,33 @@ export default class VideoCrop {
   }
 
   run() {
+    const promises = [];
     for (let i = 0; i < this.opts.x.length; i += 1) {
-      const command = new FfmpegCommand({
-        source: this.opts.input,
-      });
+      promises.push(new Promise((resolve) => {
+        const command = new FfmpegCommand({
+          source: this.opts.input,
+        });
 
-      command.complexFilter([buildCropObject(
-        this.opts.width[i],
-        this.opts.height[i],
-        this.opts.x[i],
-        this.opts.y[i],
-      )]);
+        command.on('end', () => {
+          resolve();
+        });
 
-      command.output(this.getOutputFilename(i + 1));
-      command.run();
+        if (this.opts.fps !== null) {
+          command.fps(this.opts.fps);
+        }
+
+        command.complexFilter([buildCropObject(
+          this.opts.width[i],
+          this.opts.height[i],
+          this.opts.x[i],
+          this.opts.y[i],
+        )]);
+
+        command.output(this.getOutputFilename(i + 1));
+        command.run();
+      }));
     }
+
+    return Promise.all(promises);
   }
 }
