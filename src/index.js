@@ -110,7 +110,7 @@ export default class VideoCrop {
 
         command.output(this.getOutputFilename(i + 1));
         command.run();
-      }))
+      }));
     }
 
     return Promise.all(promises);
