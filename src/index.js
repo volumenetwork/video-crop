@@ -88,7 +88,7 @@ export default class VideoCrop {
   run() {
     const promises = [];
     for (let i = 0; i < this.opts.x.length; i += 1) {
-      promises.push(new Promise(resolve => {
+      promises.push(new Promise((resolve) => {
         const command = new FfmpegCommand({
           source: this.opts.input,
         });
