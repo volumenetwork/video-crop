@@ -16,7 +16,8 @@ const opts = {
   x: [500, 600],
   y: [250, 500],
   height: [100, 300],
-  width: [100, 300]
+  width: [100, 300],
+  fps: 60 // optional 
 };
 
 const vc = new VideoCrop();
