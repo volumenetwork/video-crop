@@ -5,7 +5,7 @@
 ## Usage
 
 ```$xslt
-import VideoCrop from 'video-crop';
+import VideoCrop from 'video-crop'; // or const VideoCrop = require('video-crop').default;
 
 const testFile = '/path/to/myfile.mp4';
 const outFile = '/path/to/out.mp4';
